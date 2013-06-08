@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project Sand Valley -->
-<!-- Saved: 2013-06-08, 07:06:50 -->
+<!-- Saved: 2013-06-08, 07:19:15 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -13,7 +13,11 @@
   <Author>Tuukka Turto</Author>
   <Email>tuukka.turto@oktaeder.net</Email>
   <Sources>
-    <Source>__init__.py</Source>
+    <Source>sandvalley/__init__.py</Source>
+    <Source>sandvalley/model/__init__.py</Source>
+    <Source>sandvalley/ui/__init__.py</Source>
+    <Source>sandvalley/rules/__init__.py</Source>
+    <Source>sandvalley/test/__init__.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

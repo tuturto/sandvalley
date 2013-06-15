@@ -49,13 +49,16 @@ class PersonRepository():
         
         cursor = self.connection.cursor()
         
-        params = (person.ID, 
-                  person.person_name)
-                  
-        cursor.execute('insert into person (OID, name) values (?, ?)', 
-                       params)
+        params = (person.person_name,
+                  person.ID)
 
-        person.ID = cursor.lastrowid
+        if person.ID:
+            cursor.execute('update person set name=? where OID=?',
+                            params)            
+        else:
+            cursor.execute('insert into person (name, OID) values (?, ?)',
+                            params)
+            person.ID = cursor.lastrowid
 
         self.connection.commit()
         return person

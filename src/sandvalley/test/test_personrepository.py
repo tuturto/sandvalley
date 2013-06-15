@@ -64,9 +64,27 @@ class TestPersonRepository():
         
         repository = PersonRepository(self.connection)
         
-        person = repository.save(person)        
+        person = repository.save(person)
         loaded_person = repository.load(person.ID)
         
         assert_that(loaded_person.ID, is_(equal_to(person.ID)))
         assert_that(loaded_person.person_name, 
                     is_(equal_to(person.person_name)))
+
+    def test_updating_person(self):
+        """
+        Test that saved person can be updated
+        """
+        person = (PersonBuilder()
+                        .with_name('Jason')
+                        .build())
+                        
+        repository = PersonRepository(self.connection)        
+        person = repository.save(person)
+
+        person.person_name = 'Peter'
+        person = repository.save(person)
+        
+        loaded_person = repository.load(person.ID)
+        assert_that(loaded_person.person_name, 
+                    is_(equal_to('Peter')))

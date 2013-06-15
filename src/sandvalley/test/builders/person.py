@@ -32,9 +32,19 @@ class PersonBuilder():
         Default constructor
         """
         self.person_name = 'prototype'
+        
+    def with_name(self, person_name):
+        """
+        Configure name of the person
+        """
+        self.person_name = person_name
+        return self
 
     def build(self):
         """
         Build a person
         """
-        return Person()
+        person = Person()
+        person.person_name = self.person_name
+        
+        return person

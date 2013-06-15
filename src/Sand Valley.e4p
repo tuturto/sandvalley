@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project Sand Valley -->
-<!-- Saved: 2013-06-14, 07:05:55 -->
+<!-- Saved: 2013-06-15, 11:50:24 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -21,6 +21,13 @@
     <Source>sandvalley/test/bdd/steps/__init__.py</Source>
     <Source>sandvalley/ui/__init__.py</Source>
     <Source>sandvalley/ui/test/__init__.py</Source>
+    <Source>sandvalley/repositories/__init__.py</Source>
+    <Source>sandvalley/test/test_personrepository.py</Source>
+    <Source>sandvalley/test/matchers/__init__.py</Source>
+    <Source>sandvalley/model/person.py</Source>
+    <Source>sandvalley/repositories/person.py</Source>
+    <Source>sandvalley/test/builders/__init__.py</Source>
+    <Source>sandvalley/test/builders/person.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

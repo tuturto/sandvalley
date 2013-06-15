@@ -18,4 +18,17 @@
 #   You should have received a copy of the GNU General Public License
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
-from .person import Person
+"""
+Module for persons
+"""
+
+class Person():
+    """
+    Person
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.ID = None
+        self.person_name = None

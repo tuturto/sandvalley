@@ -18,4 +18,23 @@
 #   You should have received a copy of the GNU General Public License
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
-from .person import Person
+"""
+Module for person builder
+"""
+from sandvalley.model import Person
+
+class PersonBuilder():
+    """
+    Builder for persons
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.person_name = 'prototype'
+
+    def build(self):
+        """
+        Build a person
+        """
+        return Person()

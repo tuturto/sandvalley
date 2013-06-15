@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tuturto/sandvalley.png)](https://travis-ci.org/tuturto/sandvalley)
+
 Intro
 =====
 Sand valley is a simple town simulator.

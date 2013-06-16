@@ -19,3 +19,4 @@
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
 from .person import Person
+from .location import Location

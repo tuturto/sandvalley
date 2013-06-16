@@ -18,5 +18,17 @@
 #   You should have received a copy of the GNU General Public License
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
-from .person import PersonRepository
-from .location import LocationRepository
+"""
+Module for locations
+"""
+
+class Location():
+    """
+    Location within town
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.ID = None
+        self.location_name = None

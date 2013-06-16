@@ -47,20 +47,26 @@ class PersonRepository():
         """
         assert(person != None)
         
-        cursor = self.connection.cursor()
+        try:
+            cursor = self.connection.cursor()
         
-        params = (person.person_name,
-                  person.ID)
+            cursor.execute('savepoint personsave')
+            params = (person.person_name,
+                      person.ID)
 
-        if person.ID:
-            cursor.execute('update person set name=? where OID=?',
-                            params)            
-        else:
-            cursor.execute('insert into person (name, OID) values (?, ?)',
-                            params)
-            person.ID = cursor.lastrowid
+            if person.ID:
+                cursor.execute('update person set name=? where OID=?',
+                               params)            
+            else:
+                cursor.execute('insert into person (name, OID) values (?, ?)',
+                               params)
+                person.ID = cursor.lastrowid
 
-        self.connection.commit()
+            cursor.execute('release personsave')
+        except:
+            cursor.execute('rollback to personsave')
+            raise
+
         return person
 
     def load(self, ID):

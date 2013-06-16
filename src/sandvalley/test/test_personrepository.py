@@ -44,6 +44,8 @@ class TestPersonRepository():
         """
         self.connection = sqlite3.connect(':memory:')
         self.connection.row_factory = sqlite3.Row
+        self.connection.isolation_level = None
+        
         cursor = self.connection.cursor()
         
         cursor.execute('''create table person

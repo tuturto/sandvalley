@@ -30,7 +30,15 @@ def create_schema(connection):
     """
     connection.execute('''create table location
                        (name text)''')
+    
     connection.execute('''create table person
                        (name text)''')
+
+    connection.execute('''create table connection
+                       (name text,
+                        location1_id integer,
+                        location2_id integer,
+                        foreign key(location1_id) references location(OID),
+                        foreign key(location2_id) references location(OID))''')
 
     connection.commit()

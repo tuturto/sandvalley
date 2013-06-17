@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project Sand Valley -->
-<!-- Saved: 2013-06-15, 11:50:24 -->
+<!-- Saved: 2013-06-17, 06:22:17 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -28,6 +28,11 @@
     <Source>sandvalley/repositories/person.py</Source>
     <Source>sandvalley/test/builders/__init__.py</Source>
     <Source>sandvalley/test/builders/person.py</Source>
+    <Source>sandvalley/model/location.py</Source>
+    <Source>sandvalley/test/test_locationrepository.py</Source>
+    <Source>sandvalley/test/builders/location.py</Source>
+    <Source>sandvalley/repositories/location.py</Source>
+    <Source>sandvalley/repositories/schema.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

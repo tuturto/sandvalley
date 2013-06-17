@@ -23,6 +23,7 @@ Tests for location repository
 """
 
 from sandvalley.repositories import LocationRepository
+from sandvalley.repositories.schema import create_schema
 import sqlite3
 
 from sandvalley.test.builders import LocationBuilder
@@ -46,11 +47,7 @@ class TestLocationRepository():
         self.connection.row_factory = sqlite3.Row
         self.connection.isolation_level = None
         
-        cursor = self.connection.cursor()
-        
-        cursor.execute('''create table location
-                          (name text)''')
-        self.connection.commit()
+        create_schema(self.connection)
 
     def teardown(self):
         """

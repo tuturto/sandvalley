@@ -18,6 +18,19 @@
 #   You should have received a copy of the GNU General Public License
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
-from .person import Person
-from .location import Location
-from .connection import Connection
+"""
+Module for connections
+"""
+
+class Connection():
+    """
+    Connection between two locations
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.ID = None
+        self.connection_name = None
+        self.location1 = None
+        self.location2 = None

@@ -24,3 +24,4 @@ Package for builders
 
 from .person import PersonBuilder
 from .location import LocationBuilder
+from .connection import ConnectionBuilder

@@ -65,11 +65,11 @@ class MapRepository():
         """
         Load a map
         """
-        map = Map()
+        town_map = Map()
         
         locations = self.location_repository.load_all()
         
         for location in locations:
-            map.locations.append(location)
+            town_map.locations.append(location)
         
-        return map
+        return town_map

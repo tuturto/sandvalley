@@ -88,12 +88,6 @@ class TestMapRepository():
                                    connection_repository, 
                                    self.connection)
         repository.save(town_map)
-        
-        house = location_repository.load(location2.ID)
-        assert_that(house.location_name, is_(equal_to('house')))
-
-        station = location_repository.load(location1.ID)
-        assert_that(station.location_name, is_(equal_to('service station')))
 
         loaded_map = repository.load()
         

@@ -75,7 +75,7 @@ class TestMapRepository():
                         .with_end(location2)
                         .build())
 
-        map = (MapBuilder()
+        town_map = (MapBuilder()
                     .with_location(location1)
                     .with_location(location2)
                     .with_connection(connection)
@@ -87,7 +87,7 @@ class TestMapRepository():
         repository = MapRepository(location_repository, 
                                    connection_repository, 
                                    self.connection)
-        repository.save(map)
+        repository.save(town_map)
         
         house = location_repository.load(location2.ID)
         assert_that(house.location_name, is_(equal_to('house')))

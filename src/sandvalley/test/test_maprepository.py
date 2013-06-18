@@ -62,23 +62,23 @@ class TestMapRepository():
         """
         Test that a connection can be saved and loaded
         """
-        location1 = (LocationBuilder()
+        station  = (LocationBuilder()
                         .with_name('service station')
                         .build())
-        location2 = (LocationBuilder()
+        house = (LocationBuilder()
                         .with_name('house')
                         .build())
                         
-        connection = (ConnectionBuilder()
+        path = (ConnectionBuilder()
                         .with_name('path')
-                        .with_start(location1)
-                        .with_end(location2)
+                        .with_start(station)
+                        .with_end(house)
                         .build())
 
         town_map = (MapBuilder()
-                    .with_location(location1)
-                    .with_location(location2)
-                    .with_connection(connection)
+                    .with_location(station)
+                    .with_location(house)
+                    .with_connection(path)
                     .build())
 
         connection_repository = ConnectionRepository(self.connection)

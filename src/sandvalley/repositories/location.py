@@ -89,3 +89,23 @@ class LocationRepository():
         location.location_name = row['name']
         
         return location
+
+    def load_all(self):
+        """
+        Load all locations
+        """
+        cursor = self.connection.cursor()
+        
+        cursor.execute('select OID, * from location')
+        
+        rows = cursor.fetchall()
+        locations = []
+        
+        for row in rows:
+            location = Location()
+            location.ID = row['ROWID']
+            location.location_name = row['name']
+            
+            locations.append(location)
+        
+        return locations

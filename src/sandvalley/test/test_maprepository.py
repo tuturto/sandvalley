@@ -95,7 +95,7 @@ class TestMapRepository():
         station = location_repository.load(location1.ID)
         assert_that(station.location_name, is_(equal_to('service station')))
 
-        loaded_map = repository.load(map.ID)
+        loaded_map = repository.load()
         
         assert_that(loaded_map, has_location(house))
         assert_that(loaded_map, has_location(station))

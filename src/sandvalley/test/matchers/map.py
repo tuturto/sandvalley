@@ -21,9 +21,9 @@
 """
 Module for map related matchers
 """
-from mockito.matchers import Matcher # pylint: disable=E0611
+from hamcrest.core.base_matcher import BaseMatcher
 
-class HasLocationMatcher(Matcher):
+class HasLocationMatcher(BaseMatcher):
     """
     Matcher to check if a location exists
     """
@@ -45,21 +45,25 @@ class HasLocationMatcher(Matcher):
         :returns: True if matching, otherwise False
         :rtype: Boolean
         """
+        for loc in item.locations:
+            if loc.location_name == self.location.location_name:
+                return True
+        
         return False
 
     def describe_to(self, description):
         """
         Describe this matcher
         """
-        description.append('Character who is dead')
+        description.append('Map with location: {0}'
+                           .format(self.location))
 
     def describe_mismatch(self, item, mismatch_description):
         """
         Describe this mismatch
         """
-        mismatch_description.append('Was character with {0} hit points'
-                                    .format(0))
+        mismatch_description.append('Was map with locations: {0}'
+                                    .format(item.locations))
 
 def has_location(location):
     return HasLocationMatcher(location)
-

@@ -33,3 +33,9 @@ class Map():
         self.ID = None
         self.locations = []
         self.connections = []
+
+    def __str__(self):
+        """
+        String representation of this map
+        """
+        return 'locations:{0}'.format(self.locations)

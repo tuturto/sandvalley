@@ -61,9 +61,15 @@ class MapRepository():
 
         return map
 
-    def load(self, ID):
+    def load(self):
         """
         Load a map
         """
         map = Map()
+        
+        locations = self.location_repository.load_all()
+        
+        for location in locations:
+            map.locations.append(location)
+        
         return map

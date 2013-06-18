@@ -32,3 +32,15 @@ class Location():
         """
         self.ID = None
         self.location_name = None
+
+    def __str__(self):
+        """
+        String representation of this location
+        """
+        return '{0}:{1}'.format(self.ID, self.location_name)
+
+    def __repr__(self):
+        """
+        String representation of this location
+        """
+        return self.__str__()

@@ -21,3 +21,4 @@
 from .person import PersonRepository
 from .location import LocationRepository
 from .connection import ConnectionRepository
+from .map import MapRepository

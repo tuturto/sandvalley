@@ -21,3 +21,4 @@
 from .person import Person
 from .location import Location
 from .connection import Connection
+from .map import Map

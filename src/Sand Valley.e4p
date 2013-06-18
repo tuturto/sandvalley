@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project Sand Valley -->
-<!-- Saved: 2013-06-17, 23:23:56 -->
+<!-- Saved: 2013-06-18, 07:22:04 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -37,6 +37,11 @@
     <Source>sandvalley/repositories/connection.py</Source>
     <Source>sandvalley/model/connection.py</Source>
     <Source>sandvalley/test/builders/connection.py</Source>
+    <Source>sandvalley/test/test_maprepository.py</Source>
+    <Source>sandvalley/repositories/map.py</Source>
+    <Source>sandvalley/model/map.py</Source>
+    <Source>sandvalley/test/builders/map.py</Source>
+    <Source>sandvalley/test/matchers/map.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

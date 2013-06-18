@@ -19,10 +19,17 @@
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for builders
+Module for maps
 """
 
-from .person import PersonBuilder
-from .location import LocationBuilder
-from .connection import ConnectionBuilder
-from .map import MapBuilder
+class Map():
+    """
+    Map of town
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        self.ID = None
+        self.locations = []
+        self.connections = []

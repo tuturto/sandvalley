@@ -30,7 +30,7 @@ import sqlite3
 from sandvalley.test.builders import ConnectionBuilder, LocationBuilder
 from sandvalley.test.builders import MapBuilder
 from sandvalley.test.matchers import has_location
-from hamcrest import assert_that
+from hamcrest import assert_that, is_, equal_to
 
 class TestMapRepository():
     """
@@ -93,3 +93,47 @@ class TestMapRepository():
         
         assert_that(loaded_map, has_location(house))
         assert_that(loaded_map, has_location(station))
+
+    def test_linking(self):
+        """
+        Loading a map should link locations via connections
+        """
+        station  = (LocationBuilder()
+                        .with_name('service station')
+                        .build())
+        house = (LocationBuilder()
+                        .with_name('house')
+                        .build())
+                        
+        path = (ConnectionBuilder()
+                        .with_name('path')
+                        .with_start(station)
+                        .with_end(house)
+                        .build())
+
+        town_map = (MapBuilder()
+                    .with_location(station)
+                    .with_location(house)
+                    .with_connection(path)
+                    .build())
+
+        connection_repository = ConnectionRepository(self.connection)
+        location_repository = LocationRepository(self.connection)
+        
+        repository = MapRepository(location_repository, 
+                                   connection_repository, 
+                                   self.connection)
+        repository.save(town_map)
+
+        loaded_map = repository.load()
+        
+        houses = [x for x in loaded_map.locations
+                  if x.location_name == 'house']
+        loaded_house = houses[0]
+        
+        stations = [x for x in loaded_map.locations
+                    if x.location_name == 'service station']
+        loaded_station = stations[0]
+        
+        assert_that(loaded_house.connections[0], 
+                    is_(equal_to(loaded_station.connections[0])))

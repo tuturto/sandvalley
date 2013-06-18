@@ -93,3 +93,25 @@ class ConnectionRepository():
         connection.location2 = row['location2_id']
         
         return connection
+
+    def load_all(self):
+        """
+        Load all connections
+        """
+        cursor = self.connection.cursor()
+        
+        cursor.execute('select OID, * from connection')
+        
+        rows = cursor.fetchall()
+        connections = []
+        
+        for row in rows:
+            connection = Connection()
+            connection.ID = row['ROWID']
+            connection.connection_name = row['name']
+            connection.location1_ID = row['location1_id']
+            connection.location2_ID = row['location2_id']
+            
+            connections.append(connection)
+        
+        return connections

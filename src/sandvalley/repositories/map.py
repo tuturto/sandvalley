@@ -68,8 +68,30 @@ class MapRepository():
         town_map = Map()
         
         locations = self.location_repository.load_all()
+        connections = self.connection_repository.load_all()
         
         for location in locations:
             town_map.locations.append(location)
-        
+
+        for connection in connections:
+            town_map.connections.append(connection)
+
+        self.__link_locations(town_map)
+
         return town_map
+
+    def __link_locations(self, town_map):
+        """
+        Link locations via connections
+        """
+        for connection in town_map.connections:
+            loc1 = [x for x in town_map.locations
+                    if x.ID == connection.location1_ID][0]
+
+            loc2 = [x for x in town_map.locations
+                    if x.ID == connection.location2_ID][0]
+                    
+            loc1.connections.append(connection)
+            loc2.connections.append(connection)
+            connection.location1 = loc1
+            connection.location2 = loc2

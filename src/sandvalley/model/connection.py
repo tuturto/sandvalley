@@ -32,5 +32,7 @@ class Connection():
         """
         self.ID = None
         self.connection_name = None
+        self.location1_ID = None
+        self.location2_ID = None
         self.location1 = None
         self.location2 = None

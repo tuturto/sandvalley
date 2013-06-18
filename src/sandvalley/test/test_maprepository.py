@@ -30,7 +30,7 @@ import sqlite3
 from sandvalley.test.builders import ConnectionBuilder, LocationBuilder
 from sandvalley.test.builders import MapBuilder
 from sandvalley.test.matchers import has_location
-from hamcrest import assert_that, is_, equal_to
+from hamcrest import assert_that
 
 class TestMapRepository():
     """

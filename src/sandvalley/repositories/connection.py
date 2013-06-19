@@ -89,8 +89,8 @@ class ConnectionRepository():
         connection = Connection()
         connection.ID = row['ROWID']
         connection.connection_name = row['name']
-        connection.location1 = row['location1_id']
-        connection.location2 = row['location2_id']
+        connection.location1_ID = row['location1_id']
+        connection.location2_ID = row['location2_id']
         
         return connection
 

@@ -22,7 +22,6 @@
 Tests for connection repository
 """
 
-from sandvalley.repositories import ConnectionRepository, LocationRepository
 from sandvalley.repositories import MapRepository
 from sandvalley.repositories.schema import create_schema
 import sqlite3
@@ -80,13 +79,8 @@ class TestMapRepository():
                     .with_location(house)
                     .with_connection(path)
                     .build())
-
-        connection_repository = ConnectionRepository(self.connection)
-        location_repository = LocationRepository(self.connection)
         
-        repository = MapRepository(location_repository, 
-                                   connection_repository, 
-                                   self.connection)
+        repository = MapRepository(self.connection)
         repository.save(town_map)
 
         loaded_map = repository.load()
@@ -116,13 +110,8 @@ class TestMapRepository():
                     .with_location(house)
                     .with_connection(path)
                     .build())
-
-        connection_repository = ConnectionRepository(self.connection)
-        location_repository = LocationRepository(self.connection)
         
-        repository = MapRepository(location_repository, 
-                                   connection_repository, 
-                                   self.connection)
+        repository = MapRepository(self.connection)
         repository.save(town_map)
 
         loaded_map = repository.load()

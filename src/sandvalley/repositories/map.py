@@ -22,20 +22,22 @@
 Module for repositories related to maps
 """
 from sandvalley.model import Map
+from .location import LocationRepository
+from .connection import ConnectionRepository
 
 class MapRepository():
     """
     Repository to access maps
     """
-    def __init__(self, location_repository, connection_repository, connection):
+    def __init__(self, connection):
         """
         Default constructor
         
         :param connection: database connection to use
         :type connection: Connection
         """
-        self.location_repository = location_repository
-        self.connection_repository = connection_repository
+        self.location_repository = LocationRepository(connection)
+        self.connection_repository = ConnectionRepository(connection)
         self.connection = connection
 
     def save(self, map):

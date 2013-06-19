@@ -22,7 +22,7 @@
 Tests for location repository
 """
 
-from sandvalley.repositories import LocationRepository
+from sandvalley.repositories.location import LocationRepository
 from sandvalley.repositories.schema import create_schema
 import sqlite3
 

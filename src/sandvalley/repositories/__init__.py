@@ -19,6 +19,4 @@
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
 from .person import PersonRepository
-from .location import LocationRepository
-from .connection import ConnectionRepository
 from .map import MapRepository

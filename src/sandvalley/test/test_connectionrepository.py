@@ -22,7 +22,7 @@
 Tests for connection repository
 """
 
-from sandvalley.repositories import ConnectionRepository
+from sandvalley.repositories.connection import ConnectionRepository
 from sandvalley.repositories.schema import create_schema
 import sqlite3
 

@@ -21,4 +21,4 @@
 from .location import Location
 from .connection import Connection
 from .map import Map
-from .map_repository import MapRepository
+from sandvalley.map.repositories.map import MapRepository

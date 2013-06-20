@@ -22,7 +22,7 @@
 Tests for person repository
 """
 
-from sandvalley.repositories import PersonRepository
+from sandvalley.people import PersonRepository
 from sandvalley.repositories.schema import create_schema
 import sqlite3
 

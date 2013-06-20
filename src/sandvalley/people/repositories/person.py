@@ -21,7 +21,7 @@
 """
 Module for repositories related to persons
 """
-from sandvalley.model import Person
+from sandvalley.people.person import Person
 
 class PersonRepository():
     """

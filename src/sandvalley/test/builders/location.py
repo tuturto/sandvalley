@@ -21,7 +21,7 @@
 """
 Module for location builder
 """
-from sandvalley.model import Location
+from sandvalley.map import Location
 
 class LocationBuilder():
     """

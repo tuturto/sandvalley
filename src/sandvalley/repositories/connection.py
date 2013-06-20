@@ -21,7 +21,7 @@
 """
 Module for repositories related to connections
 """
-from sandvalley.model import Connection
+from sandvalley.map import Connection
 
 class ConnectionRepository():
     """

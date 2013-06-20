@@ -21,7 +21,7 @@
 """
 Module for repositories related to locations
 """
-from sandvalley.model import Location
+from sandvalley.map import Location
 
 class LocationRepository():
     """

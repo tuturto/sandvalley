@@ -21,7 +21,7 @@
 """
 Module for map builder
 """
-from sandvalley.model import Map
+from sandvalley.map import Map
 
 class MapBuilder():
     """

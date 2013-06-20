@@ -21,7 +21,7 @@
 """
 Module for connection builder
 """
-from sandvalley.model import Connection
+from sandvalley.map import Connection
 
 class ConnectionBuilder():
     """

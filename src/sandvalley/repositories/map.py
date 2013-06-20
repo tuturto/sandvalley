@@ -21,7 +21,7 @@
 """
 Module for repositories related to maps
 """
-from sandvalley.model import Map
+from sandvalley.map import Map
 from .location import LocationRepository
 from .connection import ConnectionRepository
 

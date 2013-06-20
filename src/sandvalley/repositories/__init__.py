@@ -19,4 +19,3 @@
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
 from .person import PersonRepository
-from .map import MapRepository

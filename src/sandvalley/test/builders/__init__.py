@@ -26,3 +26,4 @@ from .person import PersonBuilder
 from .location import LocationBuilder
 from .connection import ConnectionBuilder
 from .map import MapBuilder
+from .schedule import ScheduleBuilder

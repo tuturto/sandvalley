@@ -19,26 +19,37 @@
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Module for persons
+Module for building schedules
 """
+from sandvalley.people.schedule import Appointment, Schedule
 
-from .schedule import Schedule
-
-class Person():
+class ScheduleBuilder():
     """
-    Person
+    Builder for schedules
     """
     def __init__(self):
         """
         Default constructor
         """
-        self.ID = None
-        self.person_name = None
-        self.schedule = Schedule()
-    
-    def get_appointment(self, season, time):
+        super(ScheduleBuilder, self).__init__()
+        self.appointments = []
+
+    def with_appointment(self, season, time, location):
         """
-        Get appointment
+        Configure an appointment
         """
-        return self.schedule.get_appointment(season = season,
-                                             time = time)
+        self.appointments.append(Appointment(season = season, 
+                                             time = time, 
+                                             location = location))
+        return self
+
+    def build(self):
+        """
+        Build the schedule
+        """
+        schedule = Schedule()
+
+        for appointment in self.appointments:
+            schedule.add(appointment)
+
+        return schedule

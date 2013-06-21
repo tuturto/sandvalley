@@ -22,4 +22,44 @@
 Module for schedules
 """
 
-pass
+class Appointment():
+    """
+    Class for an appointment
+    """
+    def __init__(self, season, time, location):
+        """
+        Default constructor
+        """
+        super(Appointment, self).__init__()
+        
+        self.season = season
+        self.time = time
+        self.location = location
+
+class Schedule():
+    """
+    Class to represent a schedule
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(Schedule, self).__init__()
+        self.appointments = []
+    
+    def add(self, appointment):
+        """
+        Add an appointment
+        """
+        self.appointments.append(appointment)
+
+    def get_appointment(self, season, time):
+        """
+        Get appointment
+        """
+        matches = [x for x in self.appointments
+                   if x.season == None
+                   and x.time == None]
+
+        if len(matches):            
+            return matches[0]

@@ -32,12 +32,20 @@ class PersonBuilder():
         Default constructor
         """
         self.person_name = 'prototype'
+        self.schedule = None
         
     def with_name(self, person_name):
         """
         Configure name of the person
         """
         self.person_name = person_name
+        return self
+    
+    def with_schedule(self, schedule):
+        """"
+        Configure schedule
+        """
+        self.schedule = schedule
         return self
 
     def build(self):
@@ -46,5 +54,8 @@ class PersonBuilder():
         """
         person = Person()
         person.person_name = self.person_name
+        
+        if self.schedule:
+            person.schedule = self.schedule
         
         return person

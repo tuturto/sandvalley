@@ -85,3 +85,32 @@ class TestSchedule():
                                              time = 'day')
                                              
         assert_that(appointment.location, is_(equal_to(summer_house)))
+
+    def test_getting_very_appointment_by_time(self):
+        """
+        If no appointment matches completely, the one that matches by time should be returned
+        """
+        home = (LocationBuilder()
+                    .with_name('home')
+                    .build())
+        summer_house = (LocationBuilder()
+                            .with_name('summer house')
+                            .build())
+        
+        schedule = (ScheduleBuilder()
+                        .with_appointment(season = None,
+                                          time = 'day',
+                                          location = home)
+                        .with_appointment(season = 'summer',
+                                          time = 'day',
+                                          location = summer_house)
+                        .build())
+                        
+        person = (PersonBuilder()
+                        .with_schedule(schedule)
+                        .build())
+        
+        appointment = person.get_appointment(season = 'winter',
+                                             time = 'day')
+                                             
+        assert_that(appointment.location, is_(equal_to(home)))

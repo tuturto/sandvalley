@@ -66,6 +66,13 @@ class Schedule():
 
         matches = [x for x in self.appointments
                    if x.season == None
+                   and x.time == time]
+
+        if len(matches):            
+            return matches[0]
+
+        matches = [x for x in self.appointments
+                   if x.season == None
                    and x.time == None]
 
         if len(matches):            

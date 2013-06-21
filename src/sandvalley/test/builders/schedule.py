@@ -34,11 +34,12 @@ class ScheduleBuilder():
         super(ScheduleBuilder, self).__init__()
         self.appointments = []
 
-    def with_appointment(self, season, time, location):
+    def with_appointment(self, season, time, weekday, location):
         """
         Configure an appointment
         """
-        self.appointments.append(Appointment(season = season, 
+        self.appointments.append(Appointment(season = season,
+                                             weekday = weekday,
                                              time = time, 
                                              location = location))
         return self

@@ -26,13 +26,14 @@ class Appointment():
     """
     Class for an appointment
     """
-    def __init__(self, season, time, location):
+    def __init__(self, season, weekday, time, location):
         """
         Default constructor
         """
         super(Appointment, self).__init__()
         
         self.season = season
+        self.weekday = weekday
         self.time = time
         self.location = location
 
@@ -53,7 +54,7 @@ class Schedule():
         """
         self.appointments.append(appointment)
 
-    def get_appointment(self, season, time):
+    def get_appointment(self, season, weekday, time):
         """
         Get appointment
         """

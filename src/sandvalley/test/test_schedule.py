@@ -44,6 +44,7 @@ class TestSchedule():
         
         schedule = (ScheduleBuilder()
                         .with_appointment(season = None,
+                                          weekday = None,
                                           time = None,
                                           location = location)
                         .build())
@@ -53,6 +54,7 @@ class TestSchedule():
                         .build())
         
         appointment = person.get_appointment(season = 'summer',
+                                             weekday = 'tuesday',
                                              time = 'evening')
                                              
         assert_that(appointment.location, is_(equal_to(location)))
@@ -70,9 +72,11 @@ class TestSchedule():
         
         schedule = (ScheduleBuilder()
                         .with_appointment(season = None,
+                                          weekday = None,
                                           time = None,
                                           location = home)
                         .with_appointment(season = 'summer',
+                                          weekday = 'monday',
                                           time = 'day',
                                           location = summer_house)
                         .build())
@@ -82,6 +86,7 @@ class TestSchedule():
                         .build())
         
         appointment = person.get_appointment(season = 'summer',
+                                             weekday = 'monday',
                                              time = 'day')
                                              
         assert_that(appointment.location, is_(equal_to(summer_house)))
@@ -99,9 +104,11 @@ class TestSchedule():
         
         schedule = (ScheduleBuilder()
                         .with_appointment(season = None,
+                                          weekday = None,
                                           time = 'day',
                                           location = home)
                         .with_appointment(season = 'summer',
+                                          weekday = None,
                                           time = 'day',
                                           location = summer_house)
                         .build())
@@ -111,6 +118,7 @@ class TestSchedule():
                         .build())
         
         appointment = person.get_appointment(season = 'winter',
+                                             weekday = 'sunday',
                                              time = 'day')
                                              
         assert_that(appointment.location, is_(equal_to(home)))

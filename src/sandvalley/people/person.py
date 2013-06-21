@@ -36,9 +36,10 @@ class Person():
         self.person_name = None
         self.schedule = Schedule()
     
-    def get_appointment(self, season, time):
+    def get_appointment(self, season, weekday, time):
         """
         Get appointment
         """
         return self.schedule.get_appointment(season = season,
+                                             weekday = weekday,
                                              time = time)

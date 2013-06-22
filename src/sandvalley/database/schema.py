@@ -34,6 +34,16 @@ def create_schema(connection):
     connection.execute('''create table person
                        (name text)''')
 
+    connection.execute('''create table appointment
+                       (person_id integer,
+                        location_id integer,
+                        season integer,
+                        weekday integer,
+                        time integer,
+                        foreign key(person_id) references person(OID),
+                        foreign key(location_id) references location(OID)
+                        )''')
+
     connection.execute('''create table connection
                        (name text,
                         location1_id integer,

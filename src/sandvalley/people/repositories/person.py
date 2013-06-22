@@ -22,6 +22,7 @@
 Module for repositories related to persons
 """
 from sandvalley.people.person import Person
+from sandvalley.people.repositories.schedule import ScheduleRepository
 
 class PersonRepository():
     """
@@ -62,6 +63,9 @@ class PersonRepository():
                                params)
                 person.ID = cursor.lastrowid
 
+            schedule_repository = ScheduleRepository(self.connection)
+            schedule_repository.save(person.schedule)
+
             cursor.execute('release personsave')
         except:
             cursor.execute('rollback to personsave')
@@ -79,7 +83,9 @@ class PersonRepository():
         :rtype: Person
         """
         cursor = self.connection.cursor()
-        
+
+        schedule_repository = ScheduleRepository(self.connection)
+
         params = (ID, )
         cursor.execute('select OID, * from person where OID=?', params)
         row = cursor.fetchone()
@@ -87,5 +93,7 @@ class PersonRepository():
         person = Person()
         person.ID = row['ROWID']
         person.person_name = row['name']
+        person.schedule = schedule_repository.load(ID)
+        print(person.schedule)
         
         return person

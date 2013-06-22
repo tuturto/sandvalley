@@ -32,10 +32,21 @@ class Appointment():
         """
         super(Appointment, self).__init__()
         
+        self.ID = None
         self.season = season
         self.weekday = weekday
         self.time = time
         self.location = location
+
+    def __str__(self):
+        """
+        String representation
+        """
+        return '{0}:{1}:{2}:{3}:{4}'.format(self.ID, 
+                                            self.season, 
+                                            self.weekday, 
+                                            self.time, 
+                                            self.location)
 
 class Schedule():
     """
@@ -47,6 +58,12 @@ class Schedule():
         """
         super(Schedule, self).__init__()
         self.appointments = []
+    
+    def __str__(self):
+        """
+        String representation
+        """
+        return '{0}'.format(self.appointments)
     
     def add(self, appointment):
         """

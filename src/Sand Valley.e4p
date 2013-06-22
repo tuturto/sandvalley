@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric5 project file for project Sand Valley -->
-<!-- Saved: 2013-06-21, 06:55:15 -->
+<!-- Saved: 2013-06-22, 13:42:26 -->
 <!-- Copyright (C) 2013 Tuukka Turto, tuukka.turto@oktaeder.net -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -49,6 +49,7 @@
     <Source>sandvalley/people/schedule.py</Source>
     <Source>sandvalley/test/test_schedule.py</Source>
     <Source>sandvalley/test/builders/schedule.py</Source>
+    <Source>sandvalley/people/repositories/schedule.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

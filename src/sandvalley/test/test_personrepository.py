@@ -23,10 +23,13 @@ Tests for person repository
 """
 
 from sandvalley.people import PersonRepository
+from sandvalley.map import MapRepository
 from sandvalley.database import create_schema
 import sqlite3
 
-from sandvalley.test.builders import PersonBuilder
+from sandvalley.test.builders import PersonBuilder, LocationBuilder
+from sandvalley.test.builders import ScheduleBuilder, ConnectionBuilder
+from sandvalley.test.builders import MapBuilder
 from hamcrest import assert_that, is_, equal_to
 
 class TestPersonRepository():
@@ -87,3 +90,56 @@ class TestPersonRepository():
         loaded_person = repository.load(person.ID)
         assert_that(loaded_person.person_name, 
                     is_(equal_to('Peter')))
+
+    def test_saving_schedule(self):
+        """
+        Schedule should be saved with the person
+        """
+        home = (LocationBuilder()
+                    .with_name('home')
+                    .build())
+        station = (LocationBuilder()
+                    .with_name('station')
+                    .build())
+        path = (ConnectionBuilder()
+                        .with_name('path')
+                        .with_start(station)
+                        .with_end(home)
+                        .build())
+        town_map = (MapBuilder()
+                    .with_location(station)
+                    .with_location(home)
+                    .with_connection(path)
+                    .build())
+
+        schedule = (ScheduleBuilder()
+                        .with_appointment(season = None,
+                                          time = 'night',
+                                          weekday = None,
+                                          location = home)
+                        .with_appointment(season = 'summer',
+                                          time = 'day',
+                                          weekday = 'monday',
+                                          location = station))
+        person = (PersonBuilder()
+                    .with_schedule(schedule)
+                    .build())
+
+        map_repository = MapRepository(self.connection)
+        map_repository.save(town_map)
+        repository = PersonRepository(self.connection)
+        
+        person = repository.save(person)
+        loaded_person = repository.load(person.ID)
+
+        night_appointment = loaded_person.get_appointment(season = 'summer',
+                                                          time = 'night',
+                                                          weekday = 'monday')
+        assert_that(night_appointment.location.location_name,
+                    is_(equal_to('home')))
+
+        day_appointment = loaded_person.get_appointment(season = 'summer',
+                                                        time = 'day',
+                                                        weekday = 'monday')
+        assert_that(day_appointment.location.location_name,
+                    is_(equal_to('station')))

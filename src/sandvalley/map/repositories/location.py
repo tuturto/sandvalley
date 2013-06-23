@@ -52,8 +52,8 @@ class LocationRepository():
         
             cursor.execute('savepoint locationsave')
             params = (location.location_name,
-                      location.location[0],
-                      location.location[1],
+                      location.coordinates[0],
+                      location.coordinates[1],
                       location.ID)
 
             if location.ID:
@@ -91,6 +91,8 @@ class LocationRepository():
         location = Location()
         location.ID = row['ROWID']
         location.location_name = row['name']
+        location.coordinates = (row['x_coordinate'], 
+                                row['y_coordinate'])
         
         return location
 
@@ -109,6 +111,8 @@ class LocationRepository():
             location = Location()
             location.ID = row['ROWID']
             location.location_name = row['name']
+            location.coordinates = (row['x_coordinate'], 
+                                    row['y_coordinate'])
             
             locations.append(location)
         

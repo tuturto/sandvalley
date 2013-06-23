@@ -32,7 +32,7 @@ class LocationBuilder():
         Default constructor
         """
         self.location_name = 'prototype'
-        self.location = (0, 0)
+        self.coordinates = (0, 0)
         
     def with_name(self, location_name):
         """
@@ -47,6 +47,6 @@ class LocationBuilder():
         """
         location = Location()
         location.location_name = self.location_name
-        location.location = self.location
+        location.coordinates = self.coordinates
         
         return location

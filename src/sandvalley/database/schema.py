@@ -29,7 +29,9 @@ def create_schema(connection):
     :type connection: Connection
     """
     connection.execute('''create table location
-                       (name text)''')
+                       (name text not null,
+                        x_coordinate integer not null,
+                        y_coordinate integer not null)''')
     
     connection.execute('''create table person
                        (name text)''')

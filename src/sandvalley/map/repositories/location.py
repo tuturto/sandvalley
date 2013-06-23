@@ -52,13 +52,15 @@ class LocationRepository():
         
             cursor.execute('savepoint locationsave')
             params = (location.location_name,
+                      location.location[0],
+                      location.location[1],
                       location.ID)
 
             if location.ID:
-                cursor.execute('update location set name=? where OID=?',
+                cursor.execute('update location set name=?, x_coordinate=?, y_coordinate=? where OID=?',
                                params)            
             else:
-                cursor.execute('insert into location (name, OID) values (?, ?)',
+                cursor.execute('insert into location (name, x_coordinate, y_coordinate, OID) values (?, ?, ?, ?)',
                                params)
                 location.ID = cursor.lastrowid
 

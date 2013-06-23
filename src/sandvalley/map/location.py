@@ -32,6 +32,7 @@ class Location():
         """
         self.ID = None
         self.location_name = None
+        self.location = None
         self.connections = []
 
     def __str__(self):

@@ -36,7 +36,20 @@ class Appointment():
         self.season = season
         self.weekday = weekday
         self.time = time
+        self.location_id = None
+        self._location = None
         self.location = location
+        self.person_id = None
+
+    def _set_location(self, location):
+        assert location != None
+        self._location = location
+        self.location_id = location.ID
+    
+    def _get_location(self):
+        return self._location
+
+    location = property(_get_location, _set_location)
 
     def __str__(self):
         """

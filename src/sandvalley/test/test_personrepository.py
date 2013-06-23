@@ -95,6 +95,9 @@ class TestPersonRepository():
         """
         Schedule should be saved with the person
         """
+        map_repository = MapRepository(self.connection)        
+        repository = PersonRepository(self.connection)
+        
         home = (LocationBuilder()
                     .with_name('home')
                     .build())
@@ -112,6 +115,8 @@ class TestPersonRepository():
                     .with_connection(path)
                     .build())
 
+        map_repository.save(town_map)
+
         schedule = (ScheduleBuilder()
                         .with_appointment(season = None,
                                           time = 'night',
@@ -124,10 +129,6 @@ class TestPersonRepository():
         person = (PersonBuilder()
                     .with_schedule(schedule)
                     .build())
-
-        map_repository = MapRepository(self.connection)
-        map_repository.save(town_map)
-        repository = PersonRepository(self.connection)
         
         person = repository.save(person)
         loaded_person = repository.load(person.ID)

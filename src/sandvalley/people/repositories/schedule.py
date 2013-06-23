@@ -52,14 +52,15 @@ class ScheduleRepository():
                 params = (appointment.season,
                           appointment.weekday,
                           appointment.time,
-                          appointment.location.ID,
+                          appointment.location_id,
+                          appointment.person_id,
                           appointment.ID)
 
                 if appointment.ID:
-                    cursor.execute('update appointment set season=?, weekday=?, time=?, location_id=? where OID=?',
+                    cursor.execute('update appointment set season=?, weekday=?, time=?, location_id=?, person_id=? where OID=?',
                                    params)            
                 else:
-                    cursor.execute('insert into appointment (season, weekday, time, location_id, OID) values (?, ?, ?, ?, ?)',
+                    cursor.execute('insert into appointment (season, weekday, time, location_id, person_id, OID) values (?, ?, ?, ?, ?, ?)',
                                    params)
                 appointment.ID = cursor.lastrowid
 
@@ -84,13 +85,12 @@ class ScheduleRepository():
         schedule = Schedule()
         
         for row in rows:
-            appointment = Appointment()
+            appointment = Appointment(season = row['season'],
+                                      weekday = row['weekday'],
+                                      time = row['time'],
+                                      location = locations.load(row['location_id']))
             appointment.ID = row['ROWID']
-            appointment.season = row['season']
-            appointment.weekday = row['weekday']
-            appointment.time = row['time']
             appointment.location_id = row['location_id']
-            appointment.location = locations.load(appointment.location_id)
             appointment.person_id = row['person_id']
             schedule.add(appointment)
         

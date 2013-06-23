@@ -63,6 +63,9 @@ class PersonRepository():
                                params)
                 person.ID = cursor.lastrowid
 
+            for appointment in person.schedule.appointments:
+                appointment.person_id = person.ID
+
             schedule_repository = ScheduleRepository(self.connection)
             schedule_repository.save(person.schedule)
 

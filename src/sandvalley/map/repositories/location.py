@@ -78,6 +78,8 @@ class LocationRepository():
         :returns: location
         :rtype: Location
         """
+        assert ID != None
+        
         cursor = self.connection.cursor()
         
         params = (ID, )

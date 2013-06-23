@@ -51,6 +51,12 @@ class Appointment():
 
     location = property(_get_location, _set_location)
 
+    def __repr__(self):
+        """
+        String representation
+        """
+        return self.__str__()
+
     def __str__(self):
         """
         String representation
@@ -108,3 +114,11 @@ class Schedule():
 
         if len(matches):            
             return matches[0]
+
+    def update_person(self, person):
+        """
+        Set ownership of this schedule
+        """
+        assert person != None
+        for appointment in self.appointments:
+            appointment.person_id = person.ID

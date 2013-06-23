@@ -125,11 +125,13 @@ class TestPersonRepository():
                         .with_appointment(season = 'summer',
                                           time = 'day',
                                           weekday = 'monday',
-                                          location = station))
+                                          location = station)
+                        .build())
+
         person = (PersonBuilder()
                     .with_schedule(schedule)
                     .build())
-        
+
         person = repository.save(person)
         loaded_person = repository.load(person.ID)
 

@@ -63,8 +63,7 @@ class PersonRepository():
                                params)
                 person.ID = cursor.lastrowid
 
-            for appointment in person.schedule.appointments:
-                appointment.person_id = person.ID
+            person.schedule.update_person(person)
 
             schedule_repository = ScheduleRepository(self.connection)
             schedule_repository.save(person.schedule)
@@ -97,6 +96,5 @@ class PersonRepository():
         person.ID = row['ROWID']
         person.person_name = row['name']
         person.schedule = schedule_repository.load(ID)
-        print(person.schedule)
         
         return person

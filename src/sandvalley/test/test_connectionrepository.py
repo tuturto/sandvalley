@@ -23,6 +23,7 @@ Tests for connection repository
 """
 
 from sandvalley.map.repositories.connection import ConnectionRepository
+from sandvalley.map.repositories.location import LocationRepository
 from sandvalley.database import create_schema
 import sqlite3
 
@@ -59,10 +60,17 @@ class TestConnectionRepository():
         """
         Test that a connection can be saved and loaded
         """
+        location_repository = LocationRepository(self.connection)
+        home = LocationBuilder().build()
+        station = LocationBuilder().build()
+        
+        location_repository.save(home)
+        location_repository.save(station)
+        
         connection = (ConnectionBuilder()
                         .with_name('path')
-                        .with_start(LocationBuilder().build())
-                        .with_end(LocationBuilder().build())
+                        .with_start(home)
+                        .with_end(station)
                         .build())
                         
         repository = ConnectionRepository(self.connection)
@@ -72,14 +80,21 @@ class TestConnectionRepository():
         assert_that(loaded.connection_name, is_(equal_to(connection.connection_name)))
         
 
-    def test_updating_location(self):
+    def test_updating_connection(self):
         """
         Test that saved connection can be updated
         """
+        location_repository = LocationRepository(self.connection)
+        home = LocationBuilder().build()
+        station = LocationBuilder().build()
+        
+        location_repository.save(home)
+        location_repository.save(station)
+        
         connection = (ConnectionBuilder()
                         .with_name('path')
-                        .with_start(LocationBuilder().build())
-                        .with_end(LocationBuilder().build())
+                        .with_start(home)
+                        .with_end(station)
                         .build())
                         
         repository = ConnectionRepository(self.connection)

@@ -19,7 +19,32 @@
 #   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Package for running the simulation
+Tests for time
 """
 
-from .time import Time
+from sandvalley.simulation import Time
+
+from hamcrest import assert_that, is_, equal_to
+
+class TestTime():
+    """
+    Tests for time
+    """
+    def __init__(self):
+        """
+        Default constructor
+        """
+        super(TestTime, self).__init__()
+    
+    def test_next_day(self):
+        """
+        Test moving to next day
+        """
+        time = Time(day = 1,
+                    month = 1,
+                    day_of_week = 'monday',
+                    time_of_day = 'day')
+
+        new_time = time.next_day()
+        
+        assert_that(new_time.day, is_(equal_to(2)))

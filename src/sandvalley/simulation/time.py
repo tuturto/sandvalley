@@ -22,4 +22,28 @@
 Module for time related objects
 """
 
-pass
+class Time():
+    """
+    Class to represent time
+    """
+    def __init__(self, day, month, day_of_week, time_of_day):
+        """
+        Default constructor
+        """
+        super(Time, self).__init__()
+
+        self.day = day
+        self.month = month
+        self.day_of_week = day_of_week
+        self.time_of_day = time_of_day
+
+    def next_day(self):
+        """
+        Move to next day
+        """
+        new_time = Time(day = self.day + 1, 
+                        month = self.month, 
+                        day_of_week = self.day_of_week, 
+                        time_of_day = self.time_of_day)
+
+        return new_time

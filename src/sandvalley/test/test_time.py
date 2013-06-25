@@ -48,3 +48,17 @@ class TestTime():
         new_time = time.add_time()
         
         assert_that(new_time.time_of_day, is_(equal_to('evening')))
+
+    def test_next_day(self):
+        """
+        Test moving to next day
+        """
+        time = Time(day = 1,
+                    month = 1,
+                    day_of_week = 'monday',
+                    time_of_day = 'night')
+
+        new_time = time.add_time()
+
+        assert_that(new_time.time_of_day, is_(equal_to('day')))
+        assert_that(new_time.day, is_(equal_to(2)))

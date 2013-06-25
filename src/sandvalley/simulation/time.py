@@ -45,11 +45,16 @@ class Time():
                         'evening', 
                         'night']
 
-        current_time_of_day = times_of_day.index(self.time_of_day)
+        new_time_of_day = times_of_day.index(self.time_of_day) + 1
+        new_day = self.day
         
-        new_time = Time(day = self.day,
+        if new_time_of_day >= len(times_of_day):
+            new_time_of_day = 0
+            new_day = new_day + 1
+        
+        new_time = Time(day = new_day,
                         month = self.month,
                         day_of_week = self.day_of_week,
-                        time_of_day = times_of_day[current_time_of_day + 1])
+                        time_of_day = times_of_day[new_time_of_day])
 
         return new_time

@@ -41,7 +41,7 @@ class TestTime():
         Test moving to next time of day
         """
         time = Time(day = 1,
-                    month = 1,
+                    month = 'january',
                     day_of_week = 'monday',
                     time_of_day = 'day')
 
@@ -54,7 +54,7 @@ class TestTime():
         Test moving to next day
         """
         time = Time(day = 1,
-                    month = 1,
+                    month = 'january',
                     day_of_week = 'monday',
                     time_of_day = 'night')
 

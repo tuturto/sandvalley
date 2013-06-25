@@ -37,13 +37,19 @@ class Time():
         self.day_of_week = day_of_week
         self.time_of_day = time_of_day
 
-    def next_day(self):
+    def add_time(self):
         """
-        Move to next day
+        Move to next moment in time
         """
-        new_time = Time(day = self.day + 1, 
-                        month = self.month, 
-                        day_of_week = self.day_of_week, 
-                        time_of_day = self.time_of_day)
+        times_of_day = ['day', 
+                        'evening', 
+                        'night']
+
+        current_time_of_day = times_of_day.index(self.time_of_day)
+        
+        new_time = Time(day = self.day,
+                        month = self.month,
+                        day_of_week = self.day_of_week,
+                        time_of_day = times_of_day[current_time_of_day + 1])
 
         return new_time

@@ -36,15 +36,15 @@ class TestTime():
         """
         super(TestTime, self).__init__()
     
-    def test_next_day(self):
+    def test_next_time_of_day(self):
         """
-        Test moving to next day
+        Test moving to next time of day
         """
         time = Time(day = 1,
                     month = 1,
                     day_of_week = 'monday',
                     time_of_day = 'day')
 
-        new_time = time.next_day()
+        new_time = time.add_time()
         
-        assert_that(new_time.day, is_(equal_to(2)))
+        assert_that(new_time.time_of_day, is_(equal_to('evening')))

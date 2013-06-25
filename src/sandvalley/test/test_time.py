@@ -75,3 +75,16 @@ class TestTime():
         new_time = time.add_time()
         assert_that(new_time.day, is_(equal_to(1)))
         assert_that(new_time.month, is_(equal_to('february')))
+
+    def test_next_year(self):
+        """
+        Test moving to next year
+        """
+        time = Time(day = 31,
+                    month = 'december',
+                    day_of_week = 'monday',
+                    time_of_day = 'night')
+
+        new_time = time.add_time()
+        assert_that(new_time.day, is_(equal_to(1)))
+        assert_that(new_time.month, is_(equal_to('january')))

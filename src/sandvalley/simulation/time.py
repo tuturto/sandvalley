@@ -82,7 +82,10 @@ class Time():
         
         if new_day > days_in_month:
             new_day = 1
-            new_month = self.months[self.months.index(self.month) + 1]
+            if self.months.index(self.month) + 1 >= len(self.months):
+                new_month = 'january'
+            else:
+                new_month = self.months[self.months.index(self.month) + 1]
         else:
             new_month = self.month
         

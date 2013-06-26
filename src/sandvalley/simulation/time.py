@@ -41,6 +41,14 @@ class Time():
                              'evening', 
                              'night']
 
+        self.weekdays = ['monday', 
+                         'tuesday', 
+                         'wednesday', 
+                         'thursday', 
+                         'friday', 
+                         'saturday', 
+                         'sunday']
+
         self.months = ['january', 
                        'february', 
                        'march', 
@@ -73,10 +81,15 @@ class Time():
         """
         new_time_of_day = self.times_of_day.index(self.time_of_day) + 1
         new_day = self.day
+        new_day_of_week = self.day_of_week
         
         if new_time_of_day >= len(self.times_of_day):
             new_time_of_day = 0
             new_day = new_day + 1
+            if self.weekdays.index(self.day_of_week) + 1 >= len(self.weekdays):
+                new_day_of_week = 'monday'
+            else:
+                new_day_of_week = self.weekdays[self.weekdays.index(self.day_of_week) + 1]
         
         days_in_month = self.days_in_month[self.month]
         
@@ -91,7 +104,7 @@ class Time():
         
         new_time = Time(day = new_day,
                         month = new_month,
-                        day_of_week = self.day_of_week,
+                        day_of_week = new_day_of_week,
                         time_of_day = self.times_of_day[new_time_of_day])
 
         return new_time

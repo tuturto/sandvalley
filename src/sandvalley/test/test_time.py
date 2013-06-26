@@ -60,7 +60,8 @@ class TestTime():
 
         new_time = time.add_time()
 
-        assert_that(new_time.time_of_day, is_(equal_to('day')))
+        assert_that(new_time.time_of_day, is_(equal_to('day')))        
+        assert_that(new_time.day_of_week, is_(equal_to('tuesday')))
         assert_that(new_time.day, is_(equal_to(2)))
 
     def test_next_month(self):

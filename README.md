@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/tuturto/sandvalley.png)](https://travis-ci.org/tuturto/sandvalley)
 
 Intro
 =====
@@ -6,8 +5,8 @@ Sand valley is a simple town simulator.
 
 System Requirements
 ===================
-- Python 3.2
-- PyHamcrest 1.6
+- Python 2.7.3
+- hy 0.9.8
 
 Manual
 ======

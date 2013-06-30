@@ -17,13 +17,18 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
+(defn load-person [id])
+
 (defn save-person [person connection]
   (try
     (let [[cursor (.cursor connection)]
           [params (, (get person "person-name") (get person "id"))]]
       (if (get person "id")
-        (.execute cursor "update person set name=? where OID=?" params)
-        (do (.execute cursor "insert into person (name, OID) values (?, ?)" params)
-          (setv person.id (.lastrowid cursor)))))
+        (do
+          (.execute cursor "update person set name=? where OID=?" params)
+          (load-person (get person "id")))
+        (load-person (do 
+           .execute cursor "insert into person (name, OID) values (?, ?)" params)
+          (.lastrowid cursor)))))
     (catch [e] (error-handling)))
 )

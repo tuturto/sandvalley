@@ -17,7 +17,7 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn load-person [id]
+(defn load-person [id connection]
   (let [[cursor (.cursor connection)]
         [params (, id)]]
     (do
@@ -26,26 +26,26 @@
         (create-person-from-row row)))))
 
 (defn save-person [person connection]
-  (try
     (let [[cursor (.cursor connection)]
-          [params (, (get person "person-name") (get person "id"))]
+          [params (, (get person "name") (get person "id"))]
           [person-id (get person "id")]]
-      (if person-id)
-        (do 
-          (.execute cursor "savepoint personsave")
-          (.execute cursor "update person set name=? where OID=?" params)
-          (.execute cursor "release personsave")
-          (load-person person-id))
-        (do 
-          (.execute cursor "savepoint personsave")
-          (.execute cursor "insert into person (name, OID) values (?, ?)" params)
-          (.execute cursor "release personsave")
-          (load-person .lastrowid cursor)))
-    (catch [e] (do
-     (.execute cursor "rollback to personsave")
-     (raise)))))
+      (try 
+        (if person-id
+          (do 
+            (.execute cursor "savepoint personsave")
+            (.execute cursor "update person set name=? where OID=?" params)
+            (.execute cursor "release personsave")
+            (load-person person-id connection))
+          (do 
+            (.execute cursor "savepoint personsave")
+            (.execute cursor "insert into person (name, OID) values (?, ?)" params)
+            (load-person cursor.lastrowid connection)
+            (.execute cursor "release personsave")))
+      (catch [e Exception] (do
+        ;;(.execute cursor "rollback to personsave")
+        (raise))))))
 
 (defn create-person-from-row [row]
-  (dict id (get row "OID")
-        person-name (get row "name")))
+  (dict {"id" (get row "ROWID") 
+         "name" (get row "name")}))
 

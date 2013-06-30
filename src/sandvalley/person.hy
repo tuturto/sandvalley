@@ -22,13 +22,19 @@
 (defn save-person [person connection]
   (try
     (let [[cursor (.cursor connection)]
-          [params (, (get person "person-name") (get person "id"))]]
-      (if (get person "id")
-        (do
+          [params (, (get person "person-name") (get person "id"))]
+          [person-id (get person "id")]]
+      (if person-id)
+        (do 
+          (.execute cursor "savepoint personsave")
           (.execute cursor "update person set name=? where OID=?" params)
-          (load-person (get person "id")))
-        (load-person (do 
-           .execute cursor "insert into person (name, OID) values (?, ?)" params)
-          (.lastrowid cursor)))))
-    (catch [e] (error-handling)))
-)
+          (.execute cursor "release personsave")
+          (load-person person-id))
+        (do 
+          (.execute cursor "savepoint personsave")
+          (.execute cursor "insert into person (name, OID) values (?, ?)" params)
+          (.execute cursor "release personsave")
+          (load-person .lastrowid cursor)))
+    (catch [e] (do
+     (.execute cursor "rollback to personsave")
+     (raise)))))

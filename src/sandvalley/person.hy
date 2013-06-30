@@ -17,7 +17,13 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
-(defn load-person [id])
+(defn load-person [id]
+  (let [[cursor (.cursor connection)]
+        [params (, id)]]
+    (do
+      (.execute cursor "select OID, * from person where OID=?" params)
+      (let [[row (.fetchone cursor)]]
+        (create-person-from-row row)))))
 
 (defn save-person [person connection]
   (try
@@ -38,3 +44,8 @@
     (catch [e] (do
      (.execute cursor "rollback to personsave")
      (raise)))))
+
+(defn create-person-from-row [row]
+  (dict id (get row "OID")
+        person-name (get row "name")))
+

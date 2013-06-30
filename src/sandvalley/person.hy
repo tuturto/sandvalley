@@ -42,10 +42,10 @@
             (load-person cursor.lastrowid connection)
             (.execute cursor "release personsave")))
       (catch [e Exception] (do
-        ;;(.execute cursor "rollback to personsave")
+        (.execute cursor "rollback to personsave")
         (raise))))))
 
 (defn create-person-from-row [row]
-  (dict {"id" (get row "ROWID") 
-         "name" (get row "name")}))
+  (dict {"id" (get row 0) 
+         "name" (get row 1)}))
 

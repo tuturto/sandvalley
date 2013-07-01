@@ -24,7 +24,7 @@
 
 (defn test-save-person []
   (let [[person (dict {"id" None "name" "Pete"})]
-        [connection (create-schema(get-in-memory-connection))]
+        [connection (create-schema (get-in-memory-connection))]
         [saved-person (save-person person connection)]
         [loaded-person (load-person (get saved-person "id") connection)]]
     (assert-that (get loaded-person "name") (is- (equal-to "Pete")))))

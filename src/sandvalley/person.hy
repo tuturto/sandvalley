@@ -39,8 +39,8 @@
           (do 
             (.execute cursor "savepoint personsave")
             (.execute cursor "insert into person (name, OID) values (?, ?)" params)
-            (load-person cursor.lastrowid connection)
-            (.execute cursor "release personsave")))
+            (.execute cursor "release personsave")
+            (load-person cursor.lastrowid connection)))
       (catch [e Exception] (do
         (.execute cursor "rollback to personsave")
         (raise))))))

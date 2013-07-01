@@ -1,4 +1,3 @@
-;;!/usr/bin/env python3
 ;; -*- coding: utf-8 -*-
 ;;
 ;;   Copyright 2013 Tuukka Turto
@@ -18,15 +17,19 @@
 ;;   You should have received a copy of the GNU General Public License
 ;;   along with Sand Valley.  If not, see <http://www.gnu.org/licenses/>.
 
-(import [sandvalley.tests.helpers [get-in-memory-connection])
+(import [sandvalley.tests.helpers [get-in-memory-connection]])
 (import [sandvalley.person [save-person load-person]])
 (import [sandvalley.database.schema [create-schema]])
-(import [hamcrest [assert-that is- equal-to
+(import [hamcrest [assert-that is- equal-to]])
 
 (defn test-save-person []
   (let [[person (dict {"id" None "name" "Pete"})]
         [connection (get-in-memory-connection)]]
     (do (create-schema connection)
-      (let [[saved-person (save-person person)]
-            [loaded-person (load-person saved-person.id)]]
+      (let [[saved-person (save-person person connection)]
+            [loaded-person (load-person (get saved-person "id") connection)]]
         (assert-that (get loaded-person "name") (is- (equal-to "Pete")))))))
+
+(if (= __name__ "__main__")
+  (test-save-person))
+

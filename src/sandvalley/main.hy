@@ -27,6 +27,6 @@
 (if (= __name__ "__main__")
   (let [[connection (get-in-memory-connection)]]
     (do (create-database connection)
-      (save-person (dict {"id" None 
-                          "name" "Jaska"}) connection))))
+      (save-person {"id" None 
+                    "name" "Jaska"} connection))))
 

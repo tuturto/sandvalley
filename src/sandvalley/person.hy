@@ -47,6 +47,6 @@
         (raise))))))
 
 (defn create-person-from-row [row]
-  (dict {"id" (get row 0) 
-         "name" (get row 1)}))
+  {"id" (get row 0) 
+   "name" (get row 1)})
 

@@ -23,12 +23,23 @@
 (import [hamcrest [assert-that is- equal-to]])
 
 (defn test-save-person []
-  (let [[person (dict {"id" None "name" "Pete"})]
+  (let [[person {"id" None "name" "Pete"}]
         [connection (create-schema (get-in-memory-connection))]
         [saved-person (save-person person connection)]
         [loaded-person (load-person (get saved-person "id") connection)]]
     (assert-that (get loaded-person "name") (is- (equal-to "Pete")))))
 
-(if (= __name__ "__main__")
-  (test-save-person))
+(defn test-update-person []
+  (let [[person {"id" None "name" "Pete"}]
+        [connection (create-schema (get-in-memory-connection))]
+        [saved-person (save-person person connection)]
+        [loaded-person (load-person (get saved-person "id") connection)]]
+    (assoc loaded-person "name" "Uglak")
+    (save-person loaded-person connection)
+    (let [[updated-person (load-person (get saved-person "id") connection)]]
+      (assert-that (get updated-person "name") (is - (equal-to "Uglak"))))))
 
+(if (= __name__ "__main__")
+  (test-save-person)
+  (test-update-person))
+ 

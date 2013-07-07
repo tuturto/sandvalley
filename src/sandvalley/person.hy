@@ -27,8 +27,8 @@
 
 (defn save-person [person connection]
     (let [[cursor (.cursor connection)]
-          [params (, (get person "name") (get person "id"))]
-          [person-id (get person "id")]]
+          [params (, (:name person) (:id person))]
+          [person-id (:id person)]]
       (try 
         (if person-id
           (do 
@@ -47,6 +47,6 @@
         (raise))))))
 
 (defn create-person-from-row [row]
-  {"id" (get row 0) 
-   "name" (get row 1)})
+  {:id (get row 0) 
+   :name (get row 1)})
 

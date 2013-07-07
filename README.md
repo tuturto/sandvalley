@@ -5,7 +5,7 @@ Sand valley is a simple town simulator.
 System Requirements
 ===================
 - Python 2.7.3
-- hy 0.9.8
+- hy 0.9.10
 - PyHamcrest 1.6
 
 Manual

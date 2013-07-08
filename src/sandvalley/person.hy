@@ -20,31 +20,25 @@
 (defn load-person [id connection]
   (let [[cursor (.cursor connection)]
         [params (, id)]]
-    (do
-      (.execute cursor "select OID, * from person where OID=?" params)
-      (let [[row (.fetchone cursor)]]
-        (create-person-from-row row)))))
+    (do (.execute cursor "select OID, * from person where OID=?" params)
+	(let [[row (.fetchone cursor)]]
+	  (create-person-from-row row)))))
 
 (defn save-person [person connection]
-    (let [[cursor (.cursor connection)]
-          [params (, (:name person) (:id person))]
-          [person-id (:id person)]]
-      (try 
-        (if person-id
-          (do 
-            (.execute cursor "savepoint personsave")
-            (.execute cursor "update person set name=? where OID=?" params)
-            (.execute cursor "release personsave")
-            (load-person person-id connection))
-          (do 
-            (.execute cursor "savepoint personsave")
-            (.execute cursor "insert into person (name, OID) values (?, ?)" params)
-            (let [[new-person-id cursor.lastrowid]]
-              (.execute cursor "release personsave")
-              (load-person new-person-id connection))))
-      (catch [e Exception] (do
-        (.execute cursor "rollback to personsave")
-        (raise))))))
+  (let [[cursor (.cursor connection)]
+	[params (, (:name person) (:id person))]
+	[person-id (:id person)]]
+    (try (if person-id (do (.execute cursor "savepoint personsave")
+			   (.execute cursor "update person set name=? where OID=?" params)
+			   (.execute cursor "release personsave")
+			   (load-person person-id connection))
+	     (do (.execute cursor "savepoint personsave")
+		 (.execute cursor "insert into person (name, OID) values (?, ?)" params)
+		 (let [[new-person-id cursor.lastrowid]]
+		   (.execute cursor "release personsave")
+		   (load-person new-person-id connection))))
+	 (catch [e Exception] (do (.execute cursor "rollback to personsave")
+				  (raise))))))
 
 (defn create-person-from-row [row]
   {:id (get row 0) 

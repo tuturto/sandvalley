@@ -37,9 +37,5 @@
     (assoc loaded-person :name "Uglak")
     (save-person loaded-person connection)
     (let [[updated-person (load-person (:id saved-person) connection)]]
-      (assert-that (:name updated-person) (is - (equal-to "Uglak"))))))
+      (assert-that (:name updated-person) (is- (equal-to "Uglak"))))))
 
-(if (= __name__ "__main__")
-  (test-save-person)
-  (test-update-person))
- 

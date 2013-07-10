@@ -28,17 +28,11 @@
   (let [[cursor (.cursor connection)]
 	[params (, (:name person) (:id person))]
 	[person-id (:id person)]]
-    (try (if person-id (do (.execute cursor "savepoint personsave")
-			   (.execute cursor "update person set name=? where OID=?" params)
-			   (.execute cursor "release personsave")
-			   (load-person person-id connection))
-	     (do (.execute cursor "savepoint personsave")
-		 (.execute cursor "insert into person (name, OID) values (?, ?)" params)
-		 (let [[new-person-id cursor.lastrowid]]
-		   (.execute cursor "release personsave")
-		   (load-person new-person-id connection))))
-	 (catch [e Exception] (do (.execute cursor "rollback to personsave")
-				  (raise))))))
+    (if person-id (do (.execute cursor "update person set name=? where OID=?" params)
+		      (load-person person-id connection))
+	(do (.execute cursor "insert into person (name, OID) values (?, ?)" params)
+	    (let [[new-person-id cursor.lastrowid]]
+	      (load-person new-person-id connection))))))
 
 (defn create-person-from-row [row]
   {:id (get row 0) 

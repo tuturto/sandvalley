@@ -23,19 +23,19 @@
 (import [hamcrest [assert-that is- equal-to]])
 
 (defn test-save-person []
-  (let [[person {:id None :name "Pete"}]
-        [connection (create-schema (get-in-memory-connection))]
-        [saved-person (save-person person connection)]
-        [loaded-person (load-person (:id saved-person) connection)]]
-    (assert-that (:name loaded-person) (is- (equal-to "Pete")))))
+  (with [connection (create-schema (get-in-memory-connection))] 
+	(let [[person {:id None :name "Pete"}]
+	      [saved-person (save-person person connection)]
+	      [loaded-person (load-person (:id saved-person) connection)]]
+	  (assert-that (:name loaded-person) (is- (equal-to "Pete"))))))
 
 (defn test-update-person []
-  (let [[person {:id None :name "Pete"}]
-        [connection (create-schema (get-in-memory-connection))]
-        [saved-person (save-person person connection)]
-        [loaded-person (load-person (:id saved-person) connection)]]
-    (assoc loaded-person :name "Uglak")
-    (save-person loaded-person connection)
-    (let [[updated-person (load-person (:id saved-person) connection)]]
-      (assert-that (:name updated-person) (is- (equal-to "Uglak"))))))
+  (with [connection (create-schema (get-in-memory-connection))]
+	(let [[person {:id None :name "Pete"}]
+	      [saved-person (save-person person connection)]
+	      [loaded-person (load-person (:id saved-person) connection)]]
+	  (assoc loaded-person :name "Uglak")
+	  (save-person loaded-person connection)
+	  (let [[updated-person (load-person (:id saved-person) connection)]]
+	    (assert-that (:name updated-person) (is- (equal-to "Uglak")))))))
 

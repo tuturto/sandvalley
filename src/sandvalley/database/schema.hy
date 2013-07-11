@@ -22,5 +22,5 @@
   (.execute connection "create table person (name text not null)")
   (.execute connection "create table appointment (person_id integer not null, location_id integer not null, season integer, weekday integer, time integer, foreign key(person_id) references person(OID), foreign key(location_id) references location(OID))")
   (.execute connection "create table connection (name text not null, location1_id integer not null, location2_id integer not null, foreign key(location1_id) references location(OID), foreign key(location2_id) references location(OID))")
-  (get [connection] 0))
+  connection)
 

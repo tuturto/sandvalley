@@ -19,3 +19,4 @@
 
 import hy
 from .test_person_repository import *
+from .test_location_repository import *
